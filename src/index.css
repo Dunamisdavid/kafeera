@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --color-olive: #0F3826;
+  --color-olive-deep: #0A2619;
+  --color-gold: #D4A352;
+  --color-gold-light: #E2B96E;
+  --color-gold-pale: #E8C98F;
+  --color-ivory: #F7F2E8;
+  --color-cream: #EDE3CF;
+  --color-charcoal: #262624;
+  --color-bronze: #8E6B43;
+  --color-bronze-deep: #6E5232;
+
+  --font-display: "Cinzel", "Times New Roman", serif;
+  --font-serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@layer base {
+  html { scroll-padding-top: 5.25rem; }
+  body {
+    @apply bg-ivory text-charcoal font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+}
+
+@utility wrap {
+  width: min(1320px, 100% - 3rem);
+  margin-inline: auto;
+}
+@utility section-y {
+  padding-block: clamp(5rem, 10vw, 8.5rem);
+}
+
+/* Scrolls normally but hides the scrollbar */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .heading-1 { @apply font-serif font-medium; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.08; }
+  .heading-2 { @apply font-serif font-medium; font-size: clamp(2.4rem, 4.6vw, 3.6rem); line-height: 1.1; }
+  .heading-3 { @apply font-serif font-medium; font-size: clamp(2.1rem, 4vw, 3rem); line-height: 1.1; }
+  .lead { @apply font-serif; font-size: clamp(1.3rem, 2.2vw, 1.6rem); line-height: 1.45; }
+
+  .btn {
+    @apply inline-block border px-8 py-4 text-center text-[0.95rem] font-semibold tracking-wide no-underline transition-colors cursor-pointer;
+  }
+  .btn-gold { @apply border-gold bg-gold text-olive-deep hover:border-gold-light hover:bg-gold-light; }
+  .btn-olive { @apply border-olive bg-olive text-ivory hover:bg-olive-deep; }
+  .btn-outline-gold { @apply border-gold text-gold hover:bg-gold/10; }
+  .btn-outline-ivory { @apply border-ivory/60 text-ivory hover:bg-ivory/10; }
+  .btn-outline-olive { @apply border-olive text-olive hover:bg-olive/5; }
+
+  .text-link { @apply border-b pb-0.5 font-semibold no-underline; }
+}
+
+/* The one orchestrated moment: the hero wordmark rises once on load */
+.hero-rise { animation: hero-rise 1.4s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(0.18em); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
